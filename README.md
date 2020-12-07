@@ -5,3 +5,6 @@
 ## List of programming skills
 - Git/Github
 
+## Developing
+- http://gather8980.php.xdomain.jp/index.php
+- http://tora3blog.php.xdomain.jp/index.php
