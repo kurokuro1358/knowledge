@@ -1,11 +1,12 @@
-# Knowledge for Programming
+## 開発物
+- http://gather8980.php.xdomain.jp/  
+  ブティックホームページ  
 
-  I am university student in Japan. I learn programming skills for my hobby and future job. 
+- http://tora3blog.php.xdomain.jp/  
+  ネット掲示板
 
-## Developing
-- http://gather8980.php.xdomain.jp/
-- http://tora3blog.php.xdomain.jp/
-- http://tora3blog.php.xdomain.jp/myblog/
+- http://tora3blog.php.xdomain.jp/myblog/  
+  思い出投稿サイト  
 
-## Portfolio
+## 自己紹介サイト
 - https://kurokuro1358.github.io/kurokuro1358.github.io/
