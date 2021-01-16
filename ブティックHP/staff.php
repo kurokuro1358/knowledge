@@ -4,26 +4,13 @@
 
 <!-- DBの前処理---------------------------------->
 <?php
-//MySQLに接続
-$db = mysqli_connect($server, $user, $pass);
-if (!$db) {
-    echo "Cannot connect to MySQL.<br>";
-    exit();
-}
 
-//データベースの作成と接続
-mysqli_query($db, "create database if not exists ".$database." default character set utf8");
-if (!mysqli_select_db($db, $database)) {
-    echo "Cannot connect to database.<br>";
-}
+//DB接続
+connectMySQL();
 
 //テーブルの作成
-mysqli_query($db, "create table if not exists coordinate(
-  number int auto_increment,
-  path text not null,
-  content text not null,
-  primary key(number)
-  )");
+$query = "create table if not exists coordinate(number int auto_increment, path text not null, content text not null, primary key(number))";
+mysqlQuery($query);
 ?>
 
 <!-- DBの前処理---------------------------------->
@@ -77,7 +64,7 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['id']) && isset($_POST['p
     if (isset($tmp) && $password == $tmp) {
 
             //編集画面の表示
-            ?>
+?>
             <section id="sec01">
                 <div class="vision">
                     <br>
@@ -95,15 +82,15 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['id']) && isset($_POST['p
                     <br>
                 </div>
             </section>
-    <?php
+<?php
     } else { // IDとパスワードが間違っています
-        ?>
+?>
         <section id="sec03">
             <div class="inner">
                 IDとパスワードが間違っています。
             </div>
         </section>
-    <?php
+<?php
     } // IDとパスワードが間違っています
 }
 ?>
@@ -137,8 +124,8 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['type'])) {
             </section>
             <?php
             //テーブルからデータを抽出
-            $sql = "select path content from catalog";
-            $result = mysqli_query($db, $sql);
+            $query = "select path content from catalog";
+            $data = getQuery($query);
             // while ($data = mysqli_fetch_array($result))
         } else { // catalog追加の編集画面表示
             ?>
@@ -177,12 +164,12 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['type'])) {
             <section id="sec03">
                 <div class="inner">
                     <ul class="col3">
-                        <?php
+<?php
                         //テーブルからデータを抽出
-                        $sql = "select number, content from coordinate";
-            $result = mysqli_query($db, $sql);
-            while ($data = mysqli_fetch_array($result)) {
-                ?>
+                        $query = "select number, content from coordinate";
+                        $datas = getQuery($query);
+                        foreach($datas as $data){
+?>
                             <br>
                             <div class="form2">
                                 <li>
@@ -199,7 +186,7 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['type'])) {
                                 </form>
                             </div>
                         <?php
-            } ?>
+                        } ?>
                     <ul>
                 </div>
             </section>
@@ -209,12 +196,12 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['type'])) {
             <section id="sec03">
                 <div class="inner">
                     <ul class="col3">
-                        <?php
+<?php
                         //テーブルからデータを抽出
-                        $sql = "select number, name, price, category, content from catalog";
-            $result = mysqli_query($db, $sql);
-            while ($data = mysqli_fetch_array($result)) {
-                ?>
+                        $query = "select number, name, price, category, content from catalog";
+                        $datas = getQuery($query);
+                        foreach($datas as $data){
+?>
                             <br>
                             <div class="form2">
                                 <li>
@@ -233,8 +220,9 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['type'])) {
                                     </div>
                                 </form>
                             </div>
-                        <?php
-            } ?>
+<?php
+                        } 
+?>
                     <ul>
                 </div>
             </section>
@@ -246,12 +234,12 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['type'])) {
             <section id="sec03">
                 <div class="inner">
                     <ul class="col3">
-                        <?php
+<?php
                         //テーブルからデータを抽出
-                        $sql = "select number, content from coordinate";
-            $result = mysqli_query($db, $sql);
-            while ($data = mysqli_fetch_array($result)) {
-                ?>
+                        $query = "select number, content from coordinate";
+                        $datas = getQuery($query);
+                        foreach($datas as $data){
+?>
                             <br>
                             <div class="form2">
                                 <li>
@@ -267,8 +255,9 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['type'])) {
                                     </div>
                                 </form>
                             </div>
-                        <?php
-            } ?>
+<?php
+                        } 
+?>
                     <ul>
                 </div>
             </section>
@@ -278,12 +267,12 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['type'])) {
             <section id="sec03">
                 <div class="inner">
                     <ul class="col3">
-                        <?php
+<?php
                         //テーブルからデータを抽出
-                        $sql = "select number, name, price, category, content from catalog";
-            $result = mysqli_query($db, $sql);
-            while ($data = mysqli_fetch_array($result)) {
-                ?>
+                        $query= "select number, name, price, category, content from catalog";
+                        $datas = getQuery($query);
+                        foreach($datas as $data){
+?>
                             <br>
                             <div class="form2">
                                 <li>
@@ -302,8 +291,9 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['type'])) {
                                     </div>
                                 </form>
                             </div>
-                        <?php
-            } ?>
+<?php
+                        } 
+?>
                     <ul>
                 </div>
             </section>
@@ -337,25 +327,15 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['add'])) {
         $imgdat = mysqli_real_escape_string($db, $imgdat);
 
         //DB接続
-        $db = mysqli_connect($server, $user, $pass);
-        if (!$db) {
-            echo "Cannot connect to MySQL.";
-            exit;
-        }
+        connectMySQL();
 
-        //データベースの作成と接続
-        mysqli_query($db, "create database if not exists '".$database."' default character set utf8");
-        if (!mysqli_select_db($db, $database)) {
-            echo "Cannot connect to database.<br>";
-        }
-
-        $sql = "insert into coordinate (img, content) values ('".$imgdat."','".$content."')";
-
-        $result = mysqli_query($db, $sql);
+        $query = "insert into coordinate (img, content) values ('".$imgdat."','".$content."')";
+        $result = mysqlQuery($query);
         if (!$result) {
             echo "Cannot execute sql";
             exit;
-        } ?>
+        } 
+?>
         <section id="sec01">
             <div class="vision">
                 <h2>追加が完了しました</h2>
@@ -371,7 +351,7 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['add'])) {
             </div>
         </section>
         <br>
-        <?php
+<?php
     } else {  // catalogの追加処理
         $upimage = $_FILES['upimage']['tmp_name'];
         $name = $_POST['name'];
@@ -389,25 +369,11 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['add'])) {
         $imgdat = mysqli_real_escape_string($db, $imgdat);
 
         //DB接続
-        $db = mysqli_connect($server, $user, $pass);
-        if (!$db) {
-            echo "Cannot connect to MySQL.";
-            exit;
-        }
+        connectMySQL();
 
-        //データベースの作成と接続
-        mysqli_query($db, "create database if not exists '".$database."' default character set utf8");
-        if (!mysqli_select_db($db, $database)) {
-            echo "Cannot connect to database.<br>";
-        }
-
-        $sql = "insert into catalog (img, name, price, category, content) values ('".$imgdat."','".$name."','".$price."','".$category."','".$content."')";
-
-        $result = mysqli_query($db, $sql);
-        if (!$result) {
-            echo "Cannot execute sql";
-            exit;
-        } ?>
+        $query = "insert into catalog (img, name, price, category, content) values ('".$imgdat."','".$name."','".$price."','".$category."','".$content."')";
+        mysqlQuery($query);
+?>
         <section id="sec01">
             <div class="vision">
                 <h2>追加が完了しました</h2>
@@ -434,11 +400,14 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['add'])) {
 <?php
 if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['del'])) {
     if ($_POST['del'] == 'coordinate') { // coordinateの消去処理-------------------------------
-        mysqli_query($db, "delete from coordinate where number='".$_POST['del_num']."'");
+        $query = "delete from coordinate where number='".$_POST['del_num']."'";
+        mysqlQuery($query);
     } else { // catalogの消去処理-------------------------------------
-        mysqli_query($db, "delete from catalog where number='".$_POST['del_num']."'");
+        $query = "delete from catalog where number='".$_POST['del_num']."'";
+        mysqlQuery($query);
     }
-    mysqli_query($db, "delete from coordinate where number=".$_POST['del']); ?>
+    $query = "delete from coordinate where number=".$_POST['del'];
+    mysqlQuery($query);?>
     <br>
     <section id="sec01">
             <div class="vision">
@@ -459,9 +428,9 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['del'])) {
 <?php
 if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['edit'])) { //編集処理-------------------------
     if ($_POST['edit'] == 'coordinate') { // coordinateの編集処理-----------------------------
-        $sql = "select number, content from coordinate where number=".$_POST['edit_num'];
-        $result = mysqli_query($db, $sql);
-        while ($data = mysqli_fetch_array($result)) {
+        $query = "select number, content from coordinate where number=".$_POST['edit_num'];
+        $datas = getQuery($query);
+        foreach($datas as $data){
             ?>
         <section id="sec01">
             <div class="vision">
@@ -482,9 +451,9 @@ if ($_SERVER[REQUEST_METHOD] == 'POST' && isset($_POST['edit'])) { //編集処�
         <?php
         }
     } else { // catalogの編集処理--------------------------------------
-        $sql = "select number, name, price, category, content from catalog where number=".$_POST['edit_num'];
-        $result = mysqli_query($db, $sql);
-        while ($data = mysqli_fetch_array($result)) {
+        $query = "select number, name, price, category, content from catalog where number=".$_POST['edit_num'];
+        $$datas = getQuery($query);
+        foreach($datas as $data){
             ?>
             <section id="sec01">
                 <div class="vision">

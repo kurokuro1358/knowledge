@@ -1,26 +1,11 @@
 <?php include("header.php"); ?>
 
 <?php
-//MySQLに接続
-$db = mysqli_connect($server, $user, $pass);
-if (!$db) {
-    echo "Cannot connect to MySQL.<br>";
-    exit();
-}
-
-//データベースの作成と接続
-mysqli_query($db, "create database if not exists ".$database." default character set utf8");
-if (!mysqli_select_db($db, $database)) {
-    echo "Cannot connect to database.<br>";
-}
+connectMySQL();
 
 //テーブルの作成
-mysqli_query($db, "create table if not exists coordinate(
-  number int auto_increment,
-  img mediumblob not null,
-  content text not null,
-  primary key(number)
-  )");
+$query = "create table if not exists coordinate(number int auto_increment, img mediumblob not null, content text not null, primary key(number))";
+mysqlQuery($query);
 
 ?>
 
@@ -28,12 +13,12 @@ mysqli_query($db, "create table if not exists coordinate(
     <div class="inner">
         <h2>Coordinate</h2>
         <ul class="col3">
-            <?php
+<?php
             //テーブルからデータを抽出
-            $sql = "select number, content from coordinate order by number desc";
-            $result = mysqli_query($db, $sql);
-            while ($data = mysqli_fetch_array($result)) {
-                ?>
+            $query = "select number, content from coordinate order by number desc";
+            $datas = getQuery($query);
+            foreach($datas as $data){
+?>
             <br>
             <div class="form2">
                 <li>
@@ -43,8 +28,9 @@ mysqli_query($db, "create table if not exists coordinate(
                     <p><?php echo nl2br($data[1]); ?></p>
                 </li><br>
             </div>
-            <?php
-            } ?>
+<?php
+            } 
+?>
             <ul>
     </div>
 </section>
