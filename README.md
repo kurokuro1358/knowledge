@@ -27,7 +27,7 @@
   - ### 開発人数
     １人
   - ### 開発言語
-    PHP、MySQL
+    PHP、MySQL, Bootstrap
   - ### 役割
     設計、コーディング  
   
@@ -44,7 +44,7 @@
   - ### 開発人数
     １人
   - ### 開発言語
-    PHP、MySQL
+    PHP、MySQL, Bootstrap
   - ### 役割
     設計、コーディング   
 
