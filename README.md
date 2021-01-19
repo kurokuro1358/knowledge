@@ -1,7 +1,7 @@
 # 開発物
 - ## ブティックホームページ  
-  [ウェブサイト](http://gather8980.php.xdomain.jp/)   
-  [GitHubのリボジトリ](https://github.com/kurokuro1358/boutique)    
+  - [ウェブサイト](http://gather8980.php.xdomain.jp/)   
+  - [GitHubのリボジトリ](https://github.com/kurokuro1358/boutique)    
   - ### 概要
     お店の商品紹介ページを設け、管理者ページから在庫管理をできるようにしました。  
   - ### 開発背景
@@ -16,8 +16,8 @@
     設計、コーディング
 
 - ## ネット掲示板
-  [ウェブサイト](http://tora3blog.php.xdomain.jp/)  
-  [GitHubのリポジトリ](https://github.com/kurokuro1358/BulletinBoard)  
+  - [ウェブサイト](http://tora3blog.php.xdomain.jp/)  
+  - [GitHubのリポジトリ](https://github.com/kurokuro1358/BulletinBoard)  
   - ### 概要
     誰でも登録なしで掲示板に書き込めるサイト。  
   - ### 開発背景
@@ -33,8 +33,8 @@
   
 
 - ## ブログサイト
-  [ウェブサイト](http://tora3blog.php.xdomain.jp/myblog/)  
-  [GitHubのリポジトリ](https://github.com/kurokuro1358/BlogSite)  
+  - [ウェブサイト](http://tora3blog.php.xdomain.jp/myblog/)  
+  - [GitHubのリポジトリ](https://github.com/kurokuro1358/BlogSite)  
   - ### 概要
     写真３枚とそれに対する書き込みができるサイト。
   - ### 開発背景
@@ -48,5 +48,5 @@
   - ### 役割
     設計、コーディング   
 
-## 自己紹介サイト
-- https://kurokuro1358.github.io/kurokuro1358.github.io/
+# 自己紹介サイト
+ - [ウェブサイト](https://kurokuro1358.github.io/kurokuro1358.github.io/)
