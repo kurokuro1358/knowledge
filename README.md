@@ -1,7 +1,7 @@
 # 開発物
 - ## ブティックホームページ  
   - [ウェブサイト](http://gather8980.php.xdomain.jp/)   
-  - [GitHubのリボジトリ](https://github.com/kurokuro1358/boutique)    
+  - [GitHubのリボジトリ](https://github.com/kurokuro1358/Boutique)    
   - ### 概要
     お店の商品紹介ページを設け、管理者ページから在庫管理をできるようにしました。  
   - ### 開発背景
